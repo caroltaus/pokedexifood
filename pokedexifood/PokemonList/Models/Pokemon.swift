@@ -14,18 +14,21 @@ struct Pokemon: Decodable, Equatable {
     let height: Int
     let weight: Int
     let sprite: Sprite
+    let types: [PokemonType]
     
     enum CodingKeys: String, CodingKey {
-        case id, name, order, height, weight
+        case id, name, order, height, weight, types
         case sprite = "sprites"
         case baseExperience = "base_experience"
     }
     
     struct Sprite: Decodable, Equatable {
         let image: URL?
+        let spriteUrl: URL?
         
         enum SpriteCodingKeys: String, CodingKey {
             case other
+            case frontDefault = "front_default"
         }
         
         enum OtherCodingKeys: String, CodingKey {
@@ -40,7 +43,17 @@ struct Pokemon: Decodable, Equatable {
             let container = try? decoder.container(keyedBy: SpriteCodingKeys.self)
             let otherContainer = try? container?.nestedContainer(keyedBy: OtherCodingKeys.self, forKey: .other)
             let officialArtworkContainer = try? otherContainer?.nestedContainer(keyedBy: OfficialArtworkCodingKeys.self, forKey: .officialArtwork)
+            
             self.image = try? officialArtworkContainer?.decode(URL.self, forKey: .frontDefault)
+            self.spriteUrl = try? container?.decode(URL.self, forKey: .frontDefault)
+        }
+    }
+    
+    struct PokemonType: Decodable, Equatable {
+        let type: TypeName
+        
+        struct TypeName: Decodable, Equatable {
+            let name: String
         }
     }
 }

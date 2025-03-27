@@ -35,7 +35,7 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
             state.next = response.next
             
             presenter.dismissLoading()
-            presenter.presentData(pokemons: state.pokemons)
+            presenter.presentData(state: state)
         } catch {
             presenter.presentError()
         }
