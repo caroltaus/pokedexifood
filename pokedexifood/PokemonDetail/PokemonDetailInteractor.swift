@@ -11,7 +11,18 @@ protocol PokemonDetailInteractorProtocol: AnyObject {
     
 }
 
-final class PokemonDetailInteractor: PokemonListInteractorProtocol {
+final class PokemonDetailInteractor: PokemonDetailInteractorProtocol {
+    private let dataFetcher: PokemonDetailDataFetcherProtocol
+    private let presenter: PokemonDetailPresenterProtocol
+    
+    init(
+        dataFetcher: PokemonDetailDataFetcherProtocol,
+        presenter: PokemonDetailPresenterProtocol
+    ) {
+        self.dataFetcher = dataFetcher
+        self.presenter = presenter
+    }
+    
     func loadData() async {
         //
     }

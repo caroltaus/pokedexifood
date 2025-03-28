@@ -10,4 +10,5 @@ struct PokemonListCellViewModel: Hashable {
     let name: String
     let type: String
     let image: URL?
+    let id: Int
 }

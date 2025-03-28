@@ -23,6 +23,7 @@ final class PokemonListViewController: UIViewController {
     }
     
     private let interactor: PokemonListInteractorProtocol
+    private let coordinator: PokemonListCoordinatorProtocol
     private var shouldLoadMore: Bool = false
     private var loadingView = LoadingView(frame: .zero)
     
@@ -45,8 +46,12 @@ final class PokemonListViewController: UIViewController {
         })
     }()
     
-    init(interactor: PokemonListInteractorProtocol) {
+    init(
+        interactor: PokemonListInteractorProtocol,
+        coordinator: PokemonListCoordinatorProtocol
+    ) {
         self.interactor = interactor
+        self.coordinator = coordinator
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -125,20 +130,22 @@ extension PokemonListViewController: PokemonListViewControllerProtocol {
     }
     
     func displayErrorAlert(title: String, message: String, buttonTitle: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(.init(title: buttonTitle, style: .default, handler: { [weak self] _ in
-            Task {
-                await self?.interactor.tryAgain()
+        coordinator.showErrorAlert(
+            title: title,
+            message: message,
+            buttonTitle: buttonTitle) { [weak self] in
+                Task {
+                    await self?.interactor.tryAgain()
+                }
             }
-        }))
         shouldLoadMore = false
-        self.present(alert, animated: true, completion: nil)
     }
 }
 
 extension PokemonListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("tap!!")
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        coordinator.goToPokemonDetail(id: item.id)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

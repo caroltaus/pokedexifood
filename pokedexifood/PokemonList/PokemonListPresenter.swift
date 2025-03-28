@@ -23,7 +23,7 @@ final class PokemonListPresenter: PokemonListPresenterProtocol {
             }
             .joined(separator: " / ")
             
-            return PokemonListCellViewModel(name: pokemon.name.capitalized, type: type, image: pokemon.sprite.spriteUrl)
+            return PokemonListCellViewModel(name: pokemon.name.capitalized, type: type, image: pokemon.sprite.spriteUrl, id: pokemon.id)
         }
         viewController?.displayData(viewModels: viewModels)
         viewController?.updateShouldLoadMore(value: state.next != nil)

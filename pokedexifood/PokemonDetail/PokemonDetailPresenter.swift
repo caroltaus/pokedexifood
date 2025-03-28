@@ -10,5 +10,6 @@ protocol PokemonDetailPresenterProtocol: AnyObject {
 }
 
 final class PokemonDetailPresenter: PokemonDetailPresenterProtocol {
+    weak var viewController: PokemonDetailViewControllerProtocol?
     
 }
