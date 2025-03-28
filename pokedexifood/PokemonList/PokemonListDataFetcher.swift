@@ -6,7 +6,7 @@
 //
 import Foundation
 
-protocol PokemonListDataFetcherProtocol: AnyObject, Actor {
+protocol PokemonListDataFetcherProtocol: Actor {
     func getPokemonList(url: URL?) async throws -> PokemonResponse
 }
 

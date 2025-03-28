@@ -8,18 +8,36 @@
 import UIKit
 import SnapKit
 
+@MainActor
 protocol PokemonListViewControllerProtocol: AnyObject {
     func displayData(viewModels: [PokemonListCellViewModel])
     func updateShouldLoadMore(value: Bool)
+    func displayLoadingScreen(value: Bool)
+    func displayErrorAlert(title: String, message: String, buttonTitle: String)
 }
 
 final class PokemonListViewController: UIViewController, PokemonListViewControllerProtocol {
+    
+
+    func displayErrorAlert(title: String, message: String, buttonTitle: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(.init(title: buttonTitle, style: .default, handler: { [weak self] _ in
+            print("oi")
+            Task {
+                await self?.interactor.tryAgain()
+            }
+        }))
+        shouldLoadMore = false
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     enum Section {
         case main
     }
     
     private let interactor: PokemonListInteractorProtocol
     private var shouldLoadMore: Bool = false
+    private var loadingView = LoadingView()
     
     // Collection Elements
     private let registration = PokemonListCellView.cellRegistration
@@ -79,6 +97,15 @@ final class PokemonListViewController: UIViewController, PokemonListViewControll
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        // loading
+        view.addSubview(loadingView)
+        
+        loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        
     }
     
     private func buildCell(
@@ -104,6 +131,17 @@ final class PokemonListViewController: UIViewController, PokemonListViewControll
     func updateShouldLoadMore(value: Bool) {
         shouldLoadMore = value
     }
+    
+    func displayLoadingScreen(value: Bool) {
+        loadingView.isHidden = false
+//        if value {
+//            loadingViewContainer.isHidden = false
+//        } else {
+//            loadingViewContainer.isHidden = true
+//        }
+    }
+    
+    
 }
 
 extension PokemonListViewController: UICollectionViewDelegate {
@@ -120,5 +158,37 @@ extension PokemonListViewController: UICollectionViewDelegate {
                 await interactor.loadData()
             }
         }
+    }
+}
+
+class LoadingView: UIView {
+    private lazy var loadingViewContainer: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        return view
+    }()
+    
+    private lazy var imageLoadingContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .cellBackground
+        return view
+    }()
+    
+    func setUpHierarchy() {
+        loadingViewContainer.addSubview(imageLoadingContainer)
+    }
+    
+    func setUpConstraint() {
+        imageLoadingContainer.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.size.equalTo(CGSize(width: 200, height: 200))
+        }
+        imageLoadingContainer.layer.cornerRadius = 100
+    }
+    
+    func startLoading() {
+        
     }
 }

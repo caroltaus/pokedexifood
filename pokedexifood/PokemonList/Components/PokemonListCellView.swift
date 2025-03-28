@@ -93,7 +93,6 @@ class PokemonListCellView: UICollectionViewCell {
         cellTitle.text = viewModel.name
         cellSubtitle.text = viewModel.type
         
-        //TRAZER IMG
         imageView.backgroundColor = .viewBackground
         if let url = viewModel.image {
             Task {
@@ -105,7 +104,7 @@ class PokemonListCellView: UICollectionViewCell {
                     }
                 }
                 catch {
-                    
+                    // TRATAMENTO PRA IMAGEM PADRAO
                 }
             }
         }

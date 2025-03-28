@@ -8,6 +8,7 @@ import Foundation
 
 protocol PokemonListInteractorProtocol: AnyObject {
     func loadData() async
+    func tryAgain() async
     
 }
 
@@ -28,17 +29,23 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
     
     func loadData() async {
         do {
-            presenter.presentLoading()
+            await presenter.presentLoading()
             
             let response = try await dataFetcher.getPokemonList(url: state.next)
             state.pokemons += response.pokemons
             state.next = response.next
             
-            presenter.dismissLoading()
-            presenter.presentData(state: state)
+            await presenter.dismissLoading()
+            await presenter.presentData(state: state)
         } catch {
-            presenter.presentError()
+            await presenter.presentError()
         }
+    }
+    
+    func tryAgain() async {
+        print("bateu no int")
+        state = .init()
+        await loadData()
     }
 }
 

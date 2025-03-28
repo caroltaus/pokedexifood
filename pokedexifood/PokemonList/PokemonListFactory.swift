@@ -6,8 +6,9 @@
 //
 import UIKit
 
+@MainActor
 protocol PokemonListFactoryProtocol {
-    
+    func build() -> UIViewController
 }
 
 final class PokemonListFactory: PokemonListFactoryProtocol {

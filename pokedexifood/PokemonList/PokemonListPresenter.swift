@@ -5,6 +5,7 @@
 //  Created by Caroline Taus on 25/03/25.
 //
 
+@MainActor
 protocol PokemonListPresenterProtocol: AnyObject {
     func presentData(state: PokemonListState)
     func presentLoading()
@@ -29,15 +30,15 @@ final class PokemonListPresenter: PokemonListPresenterProtocol {
     }
     
     func presentLoading() {
-        //
+        viewController?.displayLoadingScreen(value: true)
     }
     
     func dismissLoading() {
-        
+        viewController?.displayLoadingScreen(value: false)
     }
     
     func presentError() {
-        //
+        viewController?.displayErrorAlert(title: "titulo erro", message: "msg erro", buttonTitle: "tentar d enovo")
     }
     
     
