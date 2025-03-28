@@ -38,8 +38,6 @@ final class PokemonListPresenter: PokemonListPresenterProtocol {
     }
     
     func presentError() {
-        viewController?.displayErrorAlert(title: "titulo erro", message: "msg erro", buttonTitle: "tentar d enovo")
+        viewController?.displayErrorAlert(title: "Erro", message: "Sua requisição falhou", buttonTitle: "Tentar Novamente")
     }
-    
-    
 }

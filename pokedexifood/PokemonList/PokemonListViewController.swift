@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import FLAnimatedImage
 
 @MainActor
 protocol PokemonListViewControllerProtocol: AnyObject {
@@ -16,28 +17,14 @@ protocol PokemonListViewControllerProtocol: AnyObject {
     func displayErrorAlert(title: String, message: String, buttonTitle: String)
 }
 
-final class PokemonListViewController: UIViewController, PokemonListViewControllerProtocol {
-    
-
-    func displayErrorAlert(title: String, message: String, buttonTitle: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(.init(title: buttonTitle, style: .default, handler: { [weak self] _ in
-            print("oi")
-            Task {
-                await self?.interactor.tryAgain()
-            }
-        }))
-        shouldLoadMore = false
-        self.present(alert, animated: true, completion: nil)
-    }
-    
+final class PokemonListViewController: UIViewController {
     enum Section {
         case main
     }
     
     private let interactor: PokemonListInteractorProtocol
     private var shouldLoadMore: Bool = false
-    private var loadingView = LoadingView()
+    private var loadingView = LoadingView(frame: .zero)
     
     // Collection Elements
     private let registration = PokemonListCellView.cellRegistration
@@ -76,36 +63,35 @@ final class PokemonListViewController: UIViewController, PokemonListViewControll
         view.addSubview(collectionView)
         collectionView.dataSource = dataSource
         collectionView.delegate = self
-//        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+
         setUpConstraints()
         Task {
             await interactor.loadData()
         }
+        
+        loadingView.loading(false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithDefaultBackground()
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
         appearance.backgroundColor = UIColor.pokered
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navigationController?.navigationBar.standardAppearance = appearance
-            navigationController?.navigationBar.scrollEdgeAppearance = appearance
-            navigationController?.navigationBar.compactAppearance = appearance
-        }
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+    }
     
     private func setUpConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        // loading
         view.addSubview(loadingView)
         
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        
     }
     
     private func buildCell(
@@ -120,7 +106,9 @@ final class PokemonListViewController: UIViewController, PokemonListViewControll
            
            return cell
     }
-    
+}
+
+extension PokemonListViewController: PokemonListViewControllerProtocol {
     func displayData(viewModels: [PokemonListCellViewModel]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, PokemonListCellViewModel>()
         snapshot.appendSections([.main])
@@ -133,15 +121,19 @@ final class PokemonListViewController: UIViewController, PokemonListViewControll
     }
     
     func displayLoadingScreen(value: Bool) {
-        loadingView.isHidden = false
-//        if value {
-//            loadingViewContainer.isHidden = false
-//        } else {
-//            loadingViewContainer.isHidden = true
-//        }
+        loadingView.loading(value)
     }
     
-    
+    func displayErrorAlert(title: String, message: String, buttonTitle: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(.init(title: buttonTitle, style: .default, handler: { [weak self] _ in
+            Task {
+                await self?.interactor.tryAgain()
+            }
+        }))
+        shouldLoadMore = false
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension PokemonListViewController: UICollectionViewDelegate {
@@ -158,37 +150,5 @@ extension PokemonListViewController: UICollectionViewDelegate {
                 await interactor.loadData()
             }
         }
-    }
-}
-
-class LoadingView: UIView {
-    private lazy var loadingViewContainer: UIView = {
-        let view = UIView()
-        view.isHidden = true
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        return view
-    }()
-    
-    private lazy var imageLoadingContainer: UIView = {
-        let view = UIView()
-        view.backgroundColor = .cellBackground
-        return view
-    }()
-    
-    func setUpHierarchy() {
-        loadingViewContainer.addSubview(imageLoadingContainer)
-    }
-    
-    func setUpConstraint() {
-        imageLoadingContainer.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.size.equalTo(CGSize(width: 200, height: 200))
-        }
-        imageLoadingContainer.layer.cornerRadius = 100
-    }
-    
-    func startLoading() {
-        
     }
 }

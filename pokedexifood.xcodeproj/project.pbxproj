@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C8CDB1572D94CCC1006308BA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C8CDB1562D94CCC1006308BA /* SnapKit */; };
+		C8CDB1A12D9629D5006308BA /* FLAnimatedImage in Frameworks */ = {isa = PBXBuildFile; productRef = C8CDB1A02D9629D5006308BA /* FLAnimatedImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8CDB1572D94CCC1006308BA /* SnapKit in Frameworks */,
+				C8CDB1A12D9629D5006308BA /* FLAnimatedImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +133,7 @@
 			name = pokedexifood;
 			packageProductDependencies = (
 				C8CDB1562D94CCC1006308BA /* SnapKit */,
+				C8CDB1A02D9629D5006308BA /* FLAnimatedImage */,
 			);
 			productName = pokedexifood;
 			productReference = C8184DB12D938CF8003CCE51 /* pokedexifood.app */;
@@ -216,6 +219,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				C8CDB1552D94CCC1006308BA /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C8CDB19F2D9629D5006308BA /* XCRemoteSwiftPackageReference "FLAnimatedImage" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C8184DB22D938CF8003CCE51 /* Products */;
@@ -586,6 +590,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		C8CDB19F2D9629D5006308BA /* XCRemoteSwiftPackageReference "FLAnimatedImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Flipboard/FLAnimatedImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.17;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -593,6 +605,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C8CDB1552D94CCC1006308BA /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		C8CDB1A02D9629D5006308BA /* FLAnimatedImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C8CDB19F2D9629D5006308BA /* XCRemoteSwiftPackageReference "FLAnimatedImage" */;
+			productName = FLAnimatedImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

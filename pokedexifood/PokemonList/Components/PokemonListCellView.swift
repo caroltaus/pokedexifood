@@ -96,18 +96,17 @@ class PokemonListCellView: UICollectionViewCell {
         imageView.backgroundColor = .viewBackground
         if let url = viewModel.image {
             Task {
-                do {
-                    let (data, _) = try await URLSession.shared.data(from: url)
-                    let image = UIImage(data: data)
-                    await MainActor.run {
-                        self.imageView.image = image
-                    }
-                }
-                catch {
-                    // TRATAMENTO PRA IMAGEM PADRAO
+                let image = await ImageDataFetcher.shared.requestImage(url: url)
+                await MainActor.run {
+                    self.imageView.image = image
                 }
             }
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageView.image = nil
     }
     
 }
