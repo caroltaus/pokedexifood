@@ -65,10 +65,10 @@ final class PokemonListViewController: UIViewController {
         self.title = "Pokedex"
         view.backgroundColor = .viewBackground
         
-        view.addSubview(collectionView)
         collectionView.dataSource = dataSource
         collectionView.delegate = self
-
+        
+        setUpHierarchy()
         setUpConstraints()
         Task {
             await interactor.loadData()
@@ -87,12 +87,15 @@ final class PokemonListViewController: UIViewController {
         navigationController?.navigationBar.compactAppearance = appearance
     }
     
+    private func setUpHierarchy() {
+        view.addSubview(collectionView)
+        view.addSubview(loadingView)
+    }
+    
     private func setUpConstraints() {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
-        view.addSubview(loadingView)
         
         loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

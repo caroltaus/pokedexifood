@@ -9,17 +9,14 @@ import Foundation
 struct Pokemon: Decodable, Equatable {
     let id: Int
     let name: String
-    let order: Int
-    let baseExperience: Int
-    let height: Int
-    let weight: Int
     let sprite: Sprite
     let types: [PokemonType]
+    let stats: [PokemonStat]
+    let moves: [PokemonMove]
     
     enum CodingKeys: String, CodingKey {
-        case id, name, order, height, weight, types
+        case id, name, types, stats, moves
         case sprite = "sprites"
-        case baseExperience = "base_experience"
     }
     
     struct Sprite: Decodable, Equatable {
@@ -53,6 +50,28 @@ struct Pokemon: Decodable, Equatable {
         let type: TypeName
         
         struct TypeName: Decodable, Equatable {
+            let name: String
+        }
+    }
+    
+    struct PokemonStat: Decodable, Equatable {
+        let baseStat: Int
+        let statName: StatName
+        
+        enum CodingKeys: String, CodingKey {
+            case baseStat = "base_stat"
+            case statName = "stat"
+        }
+        
+        struct StatName: Decodable, Equatable {
+            let name: String
+        }
+    }
+    
+    struct PokemonMove: Decodable, Equatable {
+        let move: MoveName
+        
+        struct MoveName: Decodable, Equatable {
             let name: String
         }
     }
