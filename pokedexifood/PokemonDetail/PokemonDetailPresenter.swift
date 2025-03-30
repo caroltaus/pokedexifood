@@ -23,7 +23,7 @@ final class PokemonDetailPresenter: PokemonDetailPresenterProtocol {
     }
 
     func presentData(pokemon: Pokemon) async {
-        viewController?.displayPokemonName(name: pokemon.name.capitalized)
+        viewController?.displayPokemonName(name: pokemon.name.replacingOccurrences(of: "-", with: " ").capitalized)
         let coverSection = await createCoverSection(url: pokemon.sprite.image)
         let pokemonTypesSection = createPokemonTypesSection(types: pokemon.types)
         let statsSection = createStatsSection(stats: pokemon.stats)
@@ -57,10 +57,13 @@ final class PokemonDetailPresenter: PokemonDetailPresenterProtocol {
         return PokemonDetailSection(section: .cover, items: [.picture(image: image)])
     }
 
-    private func createPokemonTypesSection(types: [Pokemon.PokemonType]) -> PokemonDetailSection {
+    private func createPokemonTypesSection(types: [Pokemon.PokemonTypeData]) -> PokemonDetailSection {
         let poketypes = types.map {
             // MUDAR PRA COLOR CERTA
-            let viewModel = PoketypeViewModel(typeName: $0.type.name.capitalized, typeColor: .red)
+            let viewModel = PoketypeViewModel(
+                typeName: $0.type.name.rawValue.capitalized,
+                typeColor: $0.type.name.color
+            )
             return Item.poketype(viewModel)
         }
         return PokemonDetailSection(section: .pokemonTypes, items: poketypes)

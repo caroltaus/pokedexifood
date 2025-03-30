@@ -12,7 +12,7 @@ struct Pokemon: Decodable, Equatable {
     let id: Int
     let name: String
     let sprite: Sprite
-    let types: [PokemonType]
+    let types: [PokemonTypeData]
     let stats: [PokemonStat]
     let moves: [PokemonMove]
 
@@ -51,11 +51,11 @@ struct Pokemon: Decodable, Equatable {
         }
     }
 
-    struct PokemonType: Decodable, Equatable {
+    struct PokemonTypeData: Decodable, Equatable {
         let type: TypeName
 
         struct TypeName: Decodable, Equatable {
-            let name: String
+            let name: PokemonType
         }
     }
 
@@ -79,5 +79,26 @@ struct Pokemon: Decodable, Equatable {
         struct MoveName: Decodable, Equatable {
             let name: String
         }
+    }
+
+    enum PokemonType: String, Decodable {
+        case normal
+        case fire
+        case fighting
+        case water
+        case flying
+        case grass
+        case poison
+        case electric
+        case ground
+        case psychic
+        case rock
+        case ice
+        case bug
+        case dragon
+        case ghost
+        case dark
+        case steel
+        case fairy
     }
 }

@@ -22,11 +22,11 @@ enum SectionType: Hashable, Equatable {
         case .cover:
             nil
         case .pokemonTypes:
-            "Tipo"
+            "Type"
         case .stats:
-            "Atributos"
+            "Stats"
         case .moves:
-            "Habilidades"
+            "Moves"
         }
     }
 }

@@ -19,7 +19,7 @@ final class PokemonListPresenter: PokemonListPresenterProtocol {
     func presentData(state: PokemonListState) {
         let viewModels = state.pokemons.map { pokemon in
             let type = pokemon.types.map {
-                $0.type.name.capitalized
+                $0.type.name.rawValue.replacingOccurrences(of: "-", with: " ").capitalized
             }
                 .joined(separator: " / ")
 
