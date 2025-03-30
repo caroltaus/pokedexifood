@@ -13,14 +13,14 @@ protocol PokemonListCoordinatorProtocol: AnyObject {
         title: String,
         message: String,
         buttonTitle: String,
-        onButtonTap: @escaping() -> Void
+        onButtonTap: @escaping () -> Void
     )
 }
 
 final class PokemonListCoordinator: PokemonListCoordinatorProtocol {
     weak var viewController: UIViewController?
     private let detailFactory: PokemonDetailFactoryProtocol
-    
+
     init(
         viewController: UIViewController? = nil,
         detailFactory: PokemonDetailFactoryProtocol
@@ -28,12 +28,12 @@ final class PokemonListCoordinator: PokemonListCoordinatorProtocol {
         self.viewController = viewController
         self.detailFactory = detailFactory
     }
-    
+
     func goToPokemonDetail(id: Int) {
         let detailViewController = detailFactory.build(id: id)
         viewController?.navigationController?.pushViewController(detailViewController, animated: true)
     }
-    
+
     func showErrorAlert(
         title: String,
         message: String,

@@ -16,6 +16,19 @@ enum SectionType: Hashable, Equatable {
     case pokemonTypes
     case stats
     case moves
+
+    var title: String? {
+        switch self {
+        case .cover:
+            nil
+        case .pokemonTypes:
+            "Tipo"
+        case .stats:
+            "Atributos"
+        case .moves:
+            "Habilidades"
+        }
+    }
 }
 
 enum Item: Hashable, Equatable {

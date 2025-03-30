@@ -8,5 +8,5 @@ import Foundation
 
 struct PokemonListState {
     var pokemons: [Pokemon] = []
-    var next: URL? = nil
+    var next: URL?
 }

@@ -21,23 +21,32 @@ final class PokemonListPresenter: PokemonListPresenterProtocol {
             let type = pokemon.types.map {
                 $0.type.name.capitalized
             }
-            .joined(separator: " / ")
-            
-            return PokemonListCellViewModel(name: pokemon.name.capitalized, type: type, image: pokemon.sprite.spriteUrl, id: pokemon.id)
+                .joined(separator: " / ")
+
+            return PokemonListCellViewModel(
+                name: pokemon.name.capitalized,
+                type: type,
+                image: pokemon.sprite.spriteUrl,
+                id: pokemon.id
+            )
         }
         viewController?.displayData(viewModels: viewModels)
         viewController?.updateShouldLoadMore(value: state.next != nil)
     }
-    
+
     func presentLoading() {
         viewController?.displayLoadingScreen(value: true)
     }
-    
+
     func dismissLoading() {
         viewController?.displayLoadingScreen(value: false)
     }
-    
+
     func presentError() {
-        viewController?.displayErrorAlert(title: "Erro", message: "Sua requisição falhou", buttonTitle: "Tentar Novamente")
+        viewController?.displayErrorAlert(
+            title: "Erro",
+            message: "Sua requisição falhou",
+            buttonTitle: "Tentar Novamente"
+        )
     }
 }

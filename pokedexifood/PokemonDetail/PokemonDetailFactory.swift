@@ -15,7 +15,11 @@ final class PokemonDetailFactory: PokemonDetailFactoryProtocol {
     func build(id: Int) -> UIViewController {
         let presenter = PokemonDetailPresenter(imageDataFetcher: ImageDataFetcher.shared)
         let dataFetcher = PokemonDetailDataFetcher()
-        let interactor = PokemonDetailInteractor(dataFetcher: dataFetcher, presenter: presenter, initialState: .init(id: id))
+        let interactor = PokemonDetailInteractor(
+            dataFetcher: dataFetcher,
+            presenter: presenter,
+            initialState: .init(id: id)
+        )
         let viewController = PokemonDetailViewController(interactor: interactor)
         presenter.viewController = viewController
         return viewController

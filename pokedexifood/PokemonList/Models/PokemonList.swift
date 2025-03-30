@@ -11,7 +11,7 @@ struct PokemonList: Decodable {
     let next: URL?
     let previous: URL?
     let results: [PokemonResults]
-    
+
     struct PokemonResults: Decodable {
         let name: String
         let url: URL
