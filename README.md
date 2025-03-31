@@ -1,3 +1,6 @@
+# Como Rodar
+O único requisito para rodar esse projeto é o **XCode 16**
+
 # Demo
 ![pokedex](https://github.com/user-attachments/assets/ae8a3d7f-a4a3-438a-a123-64491e3e38a1)
 
