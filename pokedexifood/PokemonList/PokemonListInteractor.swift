@@ -38,12 +38,12 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
             await presenter.dismissLoading()
             await presenter.presentData(state: state)
         } catch {
+            await presenter.dismissLoading()
             await presenter.presentError()
         }
     }
 
     func tryAgain() async {
-        print("bateu no int")
         state = .init()
         await loadData()
     }

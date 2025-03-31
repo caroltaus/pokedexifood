@@ -49,6 +49,14 @@ struct Pokemon: Decodable, Equatable {
             self.image = try? officialArtworkContainer?.decode(URL.self, forKey: .frontDefault)
             self.spriteUrl = try? container?.decode(URL.self, forKey: .frontDefault)
         }
+
+        init(
+            image: URL?,
+            sprite: URL?
+        ) {
+            self.image = image
+            self.spriteUrl = sprite
+        }
     }
 
     struct PokemonTypeData: Decodable, Equatable {

@@ -55,7 +55,7 @@ final class PoketypeCellView: UICollectionViewCell {
     func configure(model: PoketypeViewModel) {
         typeLabel.text = model.typeName
         typeLabel.textColor = model.typeColor
-        container.backgroundColor = model.typeColor.withAlphaComponent(0.2)
+        container.backgroundColor = model.typeColor.withAlphaComponent(0.15)
     }
 }
 

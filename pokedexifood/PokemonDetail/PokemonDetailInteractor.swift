@@ -34,6 +34,7 @@ final class PokemonDetailInteractor: PokemonDetailInteractorProtocol {
             await presenter.dismissLoading()
             await presenter.presentData(pokemon: response)
         } catch {
+            await presenter.dismissLoading()
             await presenter.presentError()
         }
 

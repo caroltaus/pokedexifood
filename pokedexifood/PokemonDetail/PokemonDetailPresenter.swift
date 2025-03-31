@@ -29,7 +29,12 @@ final class PokemonDetailPresenter: PokemonDetailPresenterProtocol {
         let statsSection = createStatsSection(stats: pokemon.stats)
         let movesSection = createMovesSection(moves: pokemon.moves)
 
-        viewController?.displayData(sections: [coverSection, pokemonTypesSection, statsSection, movesSection])
+        let sections = [coverSection, pokemonTypesSection, statsSection, movesSection]
+        let filteredSections = sections.filter {
+            !$0.items.isEmpty
+        }
+
+        viewController?.displayData(sections: filteredSections)
     }
 
     func presentLoading() {
@@ -42,24 +47,22 @@ final class PokemonDetailPresenter: PokemonDetailPresenterProtocol {
 
     func presentError() {
         viewController?.displayErrorAlert(
-            title: "Erro",
-            message: "Sua requisição falhou",
-            buttonTitle: "Tentar Novamente"
+            title: "Error",
+            message: "Your request has failed",
+            buttonTitle: "Try Again"
         )
     }
 
     private func createCoverSection(url: URL?) async -> PokemonDetailSection {
         guard let url = url else {
-            // IMAGEM DE ERRO DE IMAGEM
-            return PokemonDetailSection(section: .cover, items: [])
+            return PokemonDetailSection(section: .cover, items: [.picture(image: UIImage(resource: .pokemonNotFound))])
         }
-        let image = await imageDataFetcher.requestImage(url: url) ?? UIImage() // TROCAR PRA IMG D EERRO
+        let image = await imageDataFetcher.requestImage(url: url) ?? UIImage(resource: .pokemonNotFound)
         return PokemonDetailSection(section: .cover, items: [.picture(image: image)])
     }
 
     private func createPokemonTypesSection(types: [Pokemon.PokemonTypeData]) -> PokemonDetailSection {
         let poketypes = types.map {
-            // MUDAR PRA COLOR CERTA
             let viewModel = PoketypeViewModel(
                 typeName: $0.type.name.rawValue.capitalized,
                 typeColor: $0.type.name.color

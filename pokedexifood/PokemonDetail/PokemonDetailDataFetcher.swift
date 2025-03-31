@@ -11,9 +11,9 @@ protocol PokemonDetailDataFetcherProtocol: Actor {
 }
 
 final actor PokemonDetailDataFetcher: PokemonDetailDataFetcherProtocol {
-    private let session: URLSession
+    private let session: NetworkProtocol
 
-    init(session: URLSession = .shared) {
+    init(session: NetworkProtocol = URLSession.shared) {
         self.session = session
     }
 
@@ -22,7 +22,7 @@ final actor PokemonDetailDataFetcher: PokemonDetailDataFetcherProtocol {
             throw URLError.init(.badURL)
         }
 
-        return try await fetch(for: url, decodeTo: Pokemon.self)
+        return try await session.fetch(for: url, decodeTo: Pokemon.self)
     }
 
     private func pokemonDetailURL(id: Int) -> URL? {
@@ -32,14 +32,5 @@ final actor PokemonDetailDataFetcher: PokemonDetailDataFetcherProtocol {
         components.path = "/api/v2/pokemon/\(id)"
 
         return components.url
-    }
-
-    private func fetch<T: Decodable>(
-        for url: URL,
-        decodeTo type: T.Type,
-        decoder: JSONDecoder = JSONDecoder()
-    ) async throws -> T {
-        let (data, _) = try await session.data(from: url)
-        return try decoder.decode(type, from: data)
     }
 }

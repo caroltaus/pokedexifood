@@ -10,41 +10,41 @@ extension Pokemon.PokemonType {
     var color: UIColor {
         switch self {
         case .normal:
-                .gray
+                .normal
         case .fire:
-                .red
+                .fire
         case .fighting:
-                .orange
+                .fighting
         case .water:
-                .blue
+                .water
         case .flying:
-                .cyan
+                .flying
         case .grass:
-                .green
+                .grass
         case .poison:
-                .purple
+                .poison
         case .electric:
-                .yellow
+                .eletric
         case .ground:
-                .brown
+                .ground
         case .psychic:
-                .systemPink
+                .psychic
         case .rock:
-                .darkGray
+                .rock
         case .ice:
-                .blue
+                .ice
         case .bug:
-                .systemGreen
+                .bug
         case .dragon:
-                .blue
+                .dragon
         case .ghost:
-                .systemPurple
+                .ghost
         case .dark:
-                .black
+                .dark
         case .steel:
-                .blue
+                .steel
         case .fairy:
-                .systemPink
+                .fairy
         }
     }
 }

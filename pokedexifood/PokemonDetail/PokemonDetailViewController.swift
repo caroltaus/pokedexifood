@@ -166,8 +166,8 @@ final class PokemonDetailViewController: UIViewController {
     }
 
     private func setUpHierarchy() {
-        view.addSubview(loadingView)
         view.addSubview(collectionView)
+        view.addSubview(loadingView)
     }
 
     private func setUpConstraints() {
@@ -232,5 +232,13 @@ extension PokemonDetailViewController: PokemonDetailViewControllerProtocol {
         loadingView.loading(value)
     }
 
-    func displayErrorAlert(title: String, message: String, buttonTitle: String) {}
+    func displayErrorAlert(title: String, message: String, buttonTitle: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(.init(title: buttonTitle, style: .default, handler: { [weak self] _ in
+            Task {
+                await self?.interactor.loadData()
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
 }

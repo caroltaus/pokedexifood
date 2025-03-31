@@ -19,19 +19,11 @@
 			remoteGlobalIDString = C8184DB02D938CF8003CCE51;
 			remoteInfo = pokedexifood;
 		};
-		C8184DD22D938CFA003CCE51 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C8184DA92D938CF7003CCE51 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C8184DB02D938CF8003CCE51;
-			remoteInfo = pokedexifood;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		C8184DB12D938CF8003CCE51 /* pokedexifood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pokedexifood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8184DC72D938CFA003CCE51 /* pokedexifoodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokedexifoodTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C8184DD12D938CFA003CCE51 /* pokedexifoodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokedexifoodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -58,11 +50,6 @@
 			path = pokedexifoodTests;
 			sourceTree = "<group>";
 		};
-		C8184DD42D938CFA003CCE51 /* pokedexifoodUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = pokedexifoodUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,13 +69,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C8184DCE2D938CFA003CCE51 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -97,7 +77,6 @@
 			children = (
 				C8184DB32D938CF8003CCE51 /* pokedexifood */,
 				C8184DCA2D938CFA003CCE51 /* pokedexifoodTests */,
-				C8184DD42D938CFA003CCE51 /* pokedexifoodUITests */,
 				C8184DB22D938CF8003CCE51 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,7 +86,6 @@
 			children = (
 				C8184DB12D938CF8003CCE51 /* pokedexifood.app */,
 				C8184DC72D938CFA003CCE51 /* pokedexifoodTests.xctest */,
-				C8184DD12D938CFA003CCE51 /* pokedexifoodUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,29 +141,6 @@
 			productReference = C8184DC72D938CFA003CCE51 /* pokedexifoodTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C8184DD02D938CFA003CCE51 /* pokedexifoodUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C8184DE22D938CFA003CCE51 /* Build configuration list for PBXNativeTarget "pokedexifoodUITests" */;
-			buildPhases = (
-				C8184DCD2D938CFA003CCE51 /* Sources */,
-				C8184DCE2D938CFA003CCE51 /* Frameworks */,
-				C8184DCF2D938CFA003CCE51 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C8184DD32D938CFA003CCE51 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				C8184DD42D938CFA003CCE51 /* pokedexifoodUITests */,
-			);
-			name = pokedexifoodUITests;
-			packageProductDependencies = (
-			);
-			productName = pokedexifoodUITests;
-			productReference = C8184DD12D938CFA003CCE51 /* pokedexifoodUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -200,10 +155,6 @@
 						CreatedOnToolsVersion = 16.2;
 					};
 					C8184DC62D938CFA003CCE51 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = C8184DB02D938CF8003CCE51;
-					};
-					C8184DD02D938CFA003CCE51 = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = C8184DB02D938CF8003CCE51;
 					};
@@ -229,7 +180,6 @@
 			targets = (
 				C8184DB02D938CF8003CCE51 /* pokedexifood */,
 				C8184DC62D938CFA003CCE51 /* pokedexifoodTests */,
-				C8184DD02D938CFA003CCE51 /* pokedexifoodUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -243,13 +193,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C8184DC52D938CFA003CCE51 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C8184DCF2D938CFA003CCE51 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -294,13 +237,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C8184DCD2D938CFA003CCE51 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -308,11 +244,6 @@
 			isa = PBXTargetDependency;
 			target = C8184DB02D938CF8003CCE51 /* pokedexifood */;
 			targetProxy = C8184DC82D938CFA003CCE51 /* PBXContainerItemProxy */;
-		};
-		C8184DD32D938CFA003CCE51 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C8184DB02D938CF8003CCE51 /* pokedexifood */;
-			targetProxy = C8184DD22D938CFA003CCE51 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -530,40 +461,6 @@
 			};
 			name = Release;
 		};
-		C8184DE32D938CFA003CCE51 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 87UTUM347S;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = taus.pokedexifoodUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = pokedexifood;
-			};
-			name = Debug;
-		};
-		C8184DE42D938CFA003CCE51 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 87UTUM347S;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = taus.pokedexifoodUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = pokedexifood;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -590,15 +487,6 @@
 			buildConfigurations = (
 				C8184DE02D938CFA003CCE51 /* Debug */,
 				C8184DE12D938CFA003CCE51 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C8184DE22D938CFA003CCE51 /* Build configuration list for PBXNativeTarget "pokedexifoodUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C8184DE32D938CFA003CCE51 /* Debug */,
-				C8184DE42D938CFA003CCE51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

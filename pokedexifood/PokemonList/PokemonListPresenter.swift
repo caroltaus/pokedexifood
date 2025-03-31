@@ -44,9 +44,9 @@ final class PokemonListPresenter: PokemonListPresenterProtocol {
 
     func presentError() {
         viewController?.displayErrorAlert(
-            title: "Erro",
-            message: "Sua requisição falhou",
-            buttonTitle: "Tentar Novamente"
+            title: "Error",
+            message: "Your request has failed",
+            buttonTitle: "Try Again"
         )
     }
 }
